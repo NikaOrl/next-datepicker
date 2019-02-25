@@ -1,0 +1,44 @@
+$white: #fff;
+$blue-light: #5291dd;
+$blue: #0460a9;
+$next-header-height: 36px;
+$black: #000;
+$carmine-light: #d13a32;
+
+:host {
+  padding: 0 1px !important;
+}
+
+:host.ng-invalid {
+  border: 1px solid $carmine-light;
+}
+
+:host input {
+  border: 0;
+  height: 100%;
+  width: 100%;
+  //padding: 0;
+}
+
+.inline {
+  color: $blue;
+  cursor: pointer;
+}
+
+.inline:hover,
+.inline:focus {
+  color: $blue-dark;
+}
+
+.inline:disabled {
+  color: $black;
+  cursor: auto;
+}
+
+.left-aligned {
+  text-align: left;
+}
+
+.right-aligned {
+  text-align: right;
+}

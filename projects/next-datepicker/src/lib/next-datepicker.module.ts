@@ -1,10 +1,20 @@
 import { NgModule } from '@angular/core';
 import { NextDatepickerComponent } from './next-datepicker.component';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+// import { DirectivesModule } from '../directives/directives.module';
+// import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
-  declarations: [NextDatepickerComponent],
   imports: [
+    CommonModule,
+    FormsModule,
+    NgbDatepickerModule
+    // DirectivesModule,
+    // PipesModule
   ],
-  exports: [NextDatepickerComponent]
+  exports: [NextDatepickerComponent],
+  declarations: [NextDatepickerComponent]
 })
-export class NextDatepickerModule { }
+export class NextDatepickerModule {}

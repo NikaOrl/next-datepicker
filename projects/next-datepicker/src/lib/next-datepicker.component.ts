@@ -1,19 +1,144 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  NgbDateParserFormatter,
+  NgbDateStruct,
+  NgbInputDatepicker
+} from '@ng-bootstrap/ng-bootstrap';
+import { DateFormatter } from './next-datepicker.service';
+import { DateDisplay } from './next-datepicker.pipe';
+
+export enum DatePickerThemes {
+  FormControl = 'form-control',
+  Inline = 'inline'
+}
+
+export enum DatePickerAlignment {
+  left = 'left-aligned',
+  right = 'right-aligned'
+}
+
+let uniqueId = 0;
+
+const noop = function(val?: any) {};
 
 @Component({
-  selector: 'lib-next-datepicker',
-  template: `
-    <p>
-      next-datepicker works!
-    </p>
-  `,
-  styles: []
+  selector: 'next-datepicker',
+  templateUrl: './ng-datepicker.component.html',
+  styleUrls: ['./ng-datepicker.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NextDatepickerComponent),
+      multi: true
+    },
+    {
+      provide: NgbDateParserFormatter,
+      useClass: DateFormatter,
+      deps: [DateDisplay]
+    }
+  ]
 })
-export class NextDatepickerComponent implements OnInit {
+export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
+  onChangeCallback = noop;
+  onTouchedCallback = noop;
+  model;
+  @Input() id = `ng-datepicker-${++uniqueId}`;
+  @Input() placement = 'top-left';
+  @Input() container = '';
+  @Input() theme = DatePickerThemes.FormControl;
+  @Input() alignment = DatePickerAlignment.left;
+  @ViewChild('d') d: NgbInputDatepicker;
+  @ViewChild('input') input: ElementRef;
+  @Output() change = new EventEmitter<number>();
 
-  constructor() { }
-
-  ngOnInit() {
+  get cssClasses(): string {
+    return `${this.theme} ${this.alignment}`;
   }
 
+  @HostListener('keyup.esc')
+  closeFromEsc() {
+    if (this.d.isOpen()) {
+      this.d.close();
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  closeFromClick($event) {
+    if (!this.d.isOpen()) {
+      return;
+    }
+    const offset = $event.target.offsetParent;
+    if (
+      offset &&
+      offset.tagName !== 'NGB-DATEPICKER' &&
+      !this.elementRef.nativeElement.contains($event.target)
+    ) {
+      this.d.close();
+    }
+  }
+
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+
+  ngOnInit() {
+    this.renderer.removeAttribute(this.elementRef.nativeElement, 'id');
+  }
+
+  parseTimestamp(value: number): NgbDateStruct {
+    const date = new Date(value);
+    return {
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+      year: date.getFullYear()
+    };
+  }
+
+  parseDateObject(value: NgbDateStruct): number {
+    return new Date(value.year, value.month - 1, value.day).getTime();
+  }
+
+  // From ControlValueAccessor interface
+  writeValue(value: any) {
+    if (!value) {
+      this.model = '';
+      return;
+    }
+    const newModel = this.parseTimestamp(value);
+    if (newModel !== this.model) {
+      this.model = newModel;
+    }
+  }
+
+  // From ControlValueAccessor interface
+  registerOnChange(fn: any) {
+    this.onChangeCallback = fn;
+  }
+
+  // From ControlValueAccessor interface
+  registerOnTouched(fn: any) {
+    this.onTouchedCallback = fn;
+  }
+
+  setDisabledState(isDisabled) {
+    this.renderer.setProperty(this.input.nativeElement, 'disabled', isDisabled);
+  }
+
+  setModel(value: NgbDateStruct) {
+    this.model = value;
+    const valueNumber = this.parseDateObject(value);
+    this.change.emit(valueNumber);
+    this.onChangeCallback(valueNumber);
+    this.onTouchedCallback();
+  }
 }
