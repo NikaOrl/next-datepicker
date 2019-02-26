@@ -8,6 +8,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent {
   appFormGroup = new FormGroup({
-    checkboxFormControl: new FormControl('shippingDate')
+    shippingDate: new FormControl('shippingDate')
   });
 }

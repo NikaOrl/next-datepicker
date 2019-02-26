@@ -17,7 +17,7 @@ import {
   NgbInputDatepicker
 } from '@ng-bootstrap/ng-bootstrap';
 import { DateFormatter } from './next-datepicker.service';
-import { DateDisplay } from './next-datepicker.pipe';
+import { DateDisplay } from './date-display.pipe';
 
 export enum DatePickerThemes {
   FormControl = 'form-control',
@@ -35,8 +35,8 @@ const noop = function(val?: any) {};
 
 @Component({
   selector: 'next-datepicker',
-  templateUrl: './ng-datepicker.component.html',
-  styleUrls: ['./ng-datepicker.component.scss'],
+  templateUrl: './next-datepicker.component.html',
+  styleUrls: ['./next-datepicker.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -53,13 +53,13 @@ const noop = function(val?: any) {};
 export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   onChangeCallback = noop;
   onTouchedCallback = noop;
-  model;
-  @Input() id = `ng-datepicker-${++uniqueId}`;
+  model: NgbDateStruct;
+  @Input() id = `next-datepicker-${++uniqueId}`;
   @Input() placement = 'top-left';
   @Input() container = '';
   @Input() theme = DatePickerThemes.FormControl;
   @Input() alignment = DatePickerAlignment.left;
-  @ViewChild('d') d: NgbInputDatepicker;
+  @ViewChild(NgbInputDatepicker) d: NgbInputDatepicker;
   @ViewChild('input') input: ElementRef;
   @Output() change = new EventEmitter<number>();
 
@@ -111,7 +111,7 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   // From ControlValueAccessor interface
   writeValue(value: any) {
     if (!value) {
-      this.model = '';
+      // this.model = '';
       return;
     }
     const newModel = this.parseTimestamp(value);

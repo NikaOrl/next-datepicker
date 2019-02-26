@@ -1,5 +1,5 @@
 import { async, TestBed } from '@angular/core/testing';
-import { DateDisplay } from './next-datepicker.pipe';
+import { DateDisplay } from './date-display.pipe';
 import { DatePipe } from '@angular/common';
 
 describe('Pipe: DateDisplay', () => {

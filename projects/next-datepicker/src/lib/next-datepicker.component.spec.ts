@@ -16,7 +16,7 @@ import { By } from '@angular/platform-browser';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { DateDisplay } from './next-datepicker.pipe';
+import { DateDisplay } from './date-display.pipe';
 import { DateFormatter } from './next-datepicker.service';
 
 describe(`NextDatepickerComponent`, () => {
@@ -29,7 +29,7 @@ describe(`NextDatepickerComponent`, () => {
 
   @Component({
     template: `
-      <ng-datepicker [id]="id" (change)="onChange($event)"></ng-datepicker>
+      <next-datepicker [id]="id" (change)="onChange($event)"></next-datepicker>
     `
   })
   class NextDatepickerHostComponent {
