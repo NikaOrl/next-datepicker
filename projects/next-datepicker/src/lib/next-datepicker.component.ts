@@ -55,8 +55,8 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   onTouchedCallback = noop;
   model: NgbDateStruct;
   @Input() id = `next-datepicker-${++uniqueId}`;
-  @Input() placement = 'top-left';
-  @Input() container = '';
+  @Input() placement = 'bottom-left';
+  @Input() container = ''; // 'body' or null
   @Input() theme = DatePickerThemes.FormControl;
   @Input() alignment = DatePickerAlignment.left;
   @ViewChild(NgbInputDatepicker) d: NgbInputDatepicker;
