@@ -1,27 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  ChangeDetectorRef,
-  Component,
-  DebugElement,
-  NO_ERRORS_SCHEMA,
-  Pipe,
-  PipeTransform
-} from '@angular/core';
-import {
-  DatePickerAlignment,
-  DatePickerThemes,
-  NextDatepickerComponent
-} from './next-datepicker.component';
-import { By } from '@angular/platform-browser';
-import { CommonModule, DOCUMENT } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { DateDisplay } from './date-display.pipe';
-import { DateFormatter } from './next-datepicker.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ChangeDetectorRef, Component, DebugElement, NO_ERRORS_SCHEMA, Pipe, PipeTransform} from '@angular/core';
+import {DatePickerAlignment, DatePickerThemes, NextDatepickerComponent} from './next-datepicker.component';
+import {By} from '@angular/platform-browser';
+import {CommonModule, DOCUMENT} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
+import {NextDateDisplay} from '../next-date-display/next-date-display.pipe';
+import {NextDateFormatter} from '../next-date-formatter/next-date-formatter.service';
 
 describe(`NextDatepickerComponent`, () => {
-  @Pipe({ name: 'dateDisplay' })
-  class DateDisplayMock implements PipeTransform {
+  @Pipe({name: 'NextDateDisplay'})
+  class NextDateDisplayMock implements PipeTransform {
     transform(i): any {
       return i;
     }
@@ -30,7 +19,7 @@ describe(`NextDatepickerComponent`, () => {
   @Component({
     template: `
       <next-datepicker [id]="id" (change)="onChange($event)"></next-datepicker>
-    `
+    `,
   })
   class NextDatepickerHostComponent {
     id = 'id';
@@ -49,14 +38,14 @@ describe(`NextDatepickerComponent`, () => {
       imports: [CommonModule, FormsModule, NgbDatepickerModule],
       declarations: [NextDatepickerHostComponent, NextDatepickerComponent],
       providers: [
-        { provide: ChangeDetectorRef, useValue: { detectChanges: () => null } },
-        { provide: DateDisplay, useValue: DateDisplayMock },
+        {provide: ChangeDetectorRef, useValue: {detectChanges: () => null}},
+        {provide: NextDateDisplay, useValue: NextDateDisplayMock},
         {
-          provide: DateFormatter,
-          useValue: { parse: () => null, format: () => '' }
-        }
+          provide: NextDateFormatter,
+          useValue: {parse: () => null, format: () => ''},
+        },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -64,9 +53,7 @@ describe(`NextDatepickerComponent`, () => {
     fixture = TestBed.createComponent(NextDatepickerHostComponent);
     hostComponent = fixture.componentInstance;
     document = TestBed.get(DOCUMENT);
-    componentDebug = fixture.debugElement.query(
-      By.directive(NextDatepickerComponent)
-    );
+    componentDebug = fixture.debugElement.query(By.directive(NextDatepickerComponent));
     component = componentDebug.componentInstance;
     instance = component;
   });
@@ -118,8 +105,8 @@ describe(`NextDatepickerComponent`, () => {
   it(`should not close datepicker when it's click on the picker itself`, () => {
     const isOpenSpy = spyOn(component.d, 'isOpen').and.returnValue(true);
     const closeSpy = spyOn(component.d, 'close');
-    instance.elementRef.nativeElement = { contains: () => null };
-    const event = { target: { offsetParent: { tagName: 'NGB-DATEPICKER' } } };
+    instance.elementRef.nativeElement = {contains: () => null};
+    const event = {target: {offsetParent: {tagName: 'NGB-DATEPICKER'}}};
 
     component.closeFromClick(event);
 
@@ -130,12 +117,9 @@ describe(`NextDatepickerComponent`, () => {
   it(`should not close datepicker when event target is nested into the component`, () => {
     const isOpenSpy = spyOn(component.d, 'isOpen').and.returnValue(true);
     const closeSpy = spyOn(component.d, 'close');
-    instance.elementRef.nativeElement = { contains: () => null };
-    const containsSpy = spyOn(
-      instance.elementRef.nativeElement,
-      'contains'
-    ).and.returnValue(true);
-    const event = { target: { offsetParent: { tagName: 'tagName' } } };
+    instance.elementRef.nativeElement = {contains: () => null};
+    const containsSpy = spyOn(instance.elementRef.nativeElement, 'contains').and.returnValue(true);
+    const event = {target: {offsetParent: {tagName: 'tagName'}}};
 
     component.closeFromClick(event);
 
@@ -147,12 +131,9 @@ describe(`NextDatepickerComponent`, () => {
   it(`should not close datepicker when event target is not nested into the component`, () => {
     const isOpenSpy = spyOn(component.d, 'isOpen').and.returnValue(true);
     const closeSpy = spyOn(component.d, 'close');
-    instance.elementRef.nativeElement = { contains: () => null };
-    const containsSpy = spyOn(
-      instance.elementRef.nativeElement,
-      'contains'
-    ).and.returnValue(false);
-    const event = { target: { offsetParent: { tagName: 'tagName' } } };
+    instance.elementRef.nativeElement = {contains: () => null};
+    const containsSpy = spyOn(instance.elementRef.nativeElement, 'contains').and.returnValue(false);
+    const event = {target: {offsetParent: {tagName: 'tagName'}}};
 
     component.closeFromClick(event);
 
@@ -172,16 +153,14 @@ describe(`NextDatepickerComponent`, () => {
   it(`should parse timestamp to object`, () => {
     const getMonthSpy = jasmine.createSpy('getMonth').and.returnValue(4);
     const getDateSpy = jasmine.createSpy('getDate').and.returnValue(24);
-    const getFullYearSpy = jasmine
-      .createSpy('getFullYear')
-      .and.returnValue(1970);
+    const getFullYearSpy = jasmine.createSpy('getFullYear').and.returnValue(1970);
     const dateSpy = spyOn(window as any, 'Date').and.returnValue({
       getMonth: getMonthSpy,
       getDate: getDateSpy,
-      getFullYear: getFullYearSpy
+      getFullYear: getFullYearSpy,
     });
     const result = component.parseTimestamp(12345678910);
-    expect(result).toEqual({ month: 5, day: 24, year: 1970 });
+    expect(result).toEqual({month: 5, day: 24, year: 1970});
     expect(getMonthSpy).toHaveBeenCalled();
     expect(getDateSpy).toHaveBeenCalled();
     expect(getFullYearSpy).toHaveBeenCalled();
@@ -191,9 +170,9 @@ describe(`NextDatepickerComponent`, () => {
   it(`should parse date object`, () => {
     const getTimeSpy = jasmine.createSpy('getTime').and.returnValue(1);
     const dateSpy = spyOn(window as any, 'Date').and.returnValue({
-      getTime: getTimeSpy
+      getTime: getTimeSpy,
     });
-    const value = { month: 6, day: 24, year: 1970 };
+    const value = {month: 6, day: 24, year: 1970};
     const result = component.parseDateObject(value as any);
     expect(result).toEqual(1);
     expect(getTimeSpy).toHaveBeenCalled();
@@ -248,10 +227,8 @@ describe(`NextDatepickerComponent`, () => {
   });
 
   it(`should set model`, () => {
-    const value = { month: 5, day: 24, year: 1970 };
-    const spy = spyOn(component, 'parseDateObject').and.returnValue(
-      12344400000
-    );
+    const value = {month: 5, day: 24, year: 1970};
+    const spy = spyOn(component, 'parseDateObject').and.returnValue(12344400000);
     const changeSpy = spyOn(hostComponent, 'onChange');
     component.onChangeCallback = () => null;
     component.onTouchedCallback = () => null;
@@ -265,8 +242,6 @@ describe(`NextDatepickerComponent`, () => {
   });
 
   it(`should get css classes for the component`, () => {
-    expect(component.cssClasses).toBe(
-      `${DatePickerThemes.FormControl} ${DatePickerAlignment.left}`
-    );
+    expect(component.cssClasses).toBe(`${DatePickerThemes.FormControl} ${DatePickerAlignment.left}`);
   });
 });

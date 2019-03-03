@@ -1,22 +1,19 @@
-import { DateFormatter } from './next-datepicker.service';
-import { async, TestBed } from '@angular/core/testing';
-import { DatePipe } from '@angular/common';
+import {NextDateFormatter} from './next-date-formatter.service';
+import {async, TestBed} from '@angular/core/testing';
+import {DatePipe} from '@angular/common';
 
-describe(`DateFormatter`, () => {
-  let serviceForTest: DateFormatter;
+describe(`NextDateFormatter`, () => {
+  let serviceForTest: NextDateFormatter;
   let instance: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: DatePipe, useValue: { transform: () => '' } },
-        DateFormatter
-      ]
+      providers: [{provide: DatePipe, useValue: {transform: () => ''}}, NextDateFormatter],
     });
   }));
 
   beforeEach(() => {
-    serviceForTest = TestBed.get(DateFormatter);
+    serviceForTest = TestBed.get(NextDateFormatter);
     instance = serviceForTest as any;
   });
 
@@ -36,19 +33,19 @@ describe(`DateFormatter`, () => {
 
   it(`should parse year`, () => {
     const value = ' 2019 ';
-    const result = { month: null, day: null, year: 2019 };
+    const result = {month: null, day: null, year: 2019};
     expect(serviceForTest.parse(value)).toEqual(result);
   });
 
   it(`should parse year, month`, () => {
     const value = ' 2019 4 ';
-    const result = { month: 4, day: null, year: 2019 };
+    const result = {month: 4, day: null, year: 2019};
     expect(serviceForTest.parse(value)).toEqual(result);
   });
 
   it(`should parse year, month, day`, () => {
     const value = ' 2019 4 7 ';
-    const result = { month: 4, day: 7, year: 2019 };
+    const result = {month: 4, day: 7, year: 2019};
     expect(serviceForTest.parse(value)).toEqual(result);
   });
 
@@ -68,10 +65,8 @@ describe(`DateFormatter`, () => {
   });
 
   it(`should not format value when no value`, () => {
-    const spy = spyOn(instance.datePipe, 'transform').and.returnValue(
-      '2019 4 7'
-    );
-    const value = { month: 4, day: 7, year: 2019 };
+    const spy = spyOn(instance.datePipe, 'transform').and.returnValue('2019 4 7');
+    const value = {month: 4, day: 7, year: 2019};
     const date = new Date(value.year, value.month - 1, value.day);
     expect(serviceForTest.format(value as any)).toBe('2019 4 7');
     expect(spy).toHaveBeenCalledWith(date);
