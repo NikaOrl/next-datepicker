@@ -129,6 +129,21 @@ next-datepicker {
     width: 100%;
   }
 
+  .inline {
+    color: $blue;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $blue-dark;
+    }
+
+    &:disabled {
+      color: $black;
+      cursor: auto;
+    }
+  }
+
   .left-aligned {
     text-align: left;
   }
@@ -315,21 +330,6 @@ next-datepicker {
 
     .ngb-dp-week {
       justify-content: space-around;
-    }
-
-    .ngb-dp-navigation-chevron {
-      color: $blue;
-      cursor: pointer;
-
-      &:hover,
-      &:focus {
-        color: $blue-dark;
-      }
-
-      &:disabled {
-        color: $black;
-        cursor: auto;
-      }
     }
 
     ngb-datepicker-navigation-select {

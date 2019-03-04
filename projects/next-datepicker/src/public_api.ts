@@ -3,5 +3,6 @@
  */
 
 export * from './lib/next-date-formatter/next-date-formatter.service';
+export * from './lib/next-date-display/next-date-display.pipe';
 export * from './lib/next-datepicker/next-datepicker.component';
 export * from './lib/next-datepicker/next-datepicker.module';

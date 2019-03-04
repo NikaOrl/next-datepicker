@@ -1,7 +1,10 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import {Pipe, PipeTransform, Injectable} from '@angular/core';
 import {DatePipe} from '@angular/common';
 
 @Pipe({name: 'NextDateDisplay', pure: true})
+@Injectable({
+  providedIn: 'root',
+})
 export class NextDateDisplay implements PipeTransform {
   constructor(private datePipe: DatePipe) {}
 
