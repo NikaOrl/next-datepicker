@@ -18,7 +18,7 @@ export class NextDateFormatter extends NgbDateParserFormatter {
     super();
   }
 
-  parse(value: string): NgbDateStruct {
+  public parse(value: string): NgbDateStruct {
     if (value) {
       const dateParts = value.trim().split(/\D/);
       if (dateParts.length === 1 && isNumber(dateParts[0])) {
@@ -40,7 +40,7 @@ export class NextDateFormatter extends NgbDateParserFormatter {
     return null;
   }
 
-  format(dateStruct: NgbDateStruct): string {
+  public format(dateStruct: NgbDateStruct): string {
     if (!dateStruct) {
       return '';
     }

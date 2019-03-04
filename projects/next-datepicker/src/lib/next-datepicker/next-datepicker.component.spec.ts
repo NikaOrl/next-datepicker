@@ -11,7 +11,7 @@ import {NextDateFormatter} from '../next-date-formatter/next-date-formatter.serv
 describe(`NextDatepickerComponent`, () => {
   @Pipe({name: 'NextDateDisplay'})
   class NextDateDisplayMock implements PipeTransform {
-    transform(i): any {
+    public transform(i): any {
       return i;
     }
   }
@@ -22,8 +22,8 @@ describe(`NextDatepickerComponent`, () => {
     `,
   })
   class NextDatepickerHostComponent {
-    id = 'id';
-    onChange = (value: number) => null;
+    public id = 'id';
+    public onChange = (value: number) => null;
   }
 
   let hostComponent: NextDatepickerHostComponent;
