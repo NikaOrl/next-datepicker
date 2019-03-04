@@ -12,7 +12,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {NgbDateParserFormatter, NgbDateStruct, NgbInputDatepicker} from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDateParserFormatter,
+  NgbDateStruct,
+  NgbInputDatepicker,
+} from '@ng-bootstrap/ng-bootstrap';
 import {NextDateFormatter} from '../next-date-formatter/next-date-formatter.service';
 import {NextDateDisplay} from '../next-date-display/next-date-display.pipe';
 
@@ -55,8 +59,8 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   @Input() id = `next-datepicker-${++uniqueId}`;
   @Input() placement = 'bottom-left';
   @Input() container = ''; // 'body' or null
-  @Input() theme = DatePickerThemes.FormControl;
-  @Input() alignment = DatePickerAlignment.left;
+  @Input() theme = DatePickerThemes.FormControl; // input class = 'form-control' or 'inline'
+  @Input() alignment = DatePickerAlignment.left; // input class = 'left-aligned' or 'right-aligned'
   @ViewChild(NgbInputDatepicker) d: NgbInputDatepicker;
   @ViewChild('input') input: ElementRef;
   @Output() change = new EventEmitter<number>();
@@ -78,7 +82,11 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
       return;
     }
     const offset = $event.target.offsetParent;
-    if (offset && offset.tagName !== 'NGB-DATEPICKER' && !this.elementRef.nativeElement.contains($event.target)) {
+    if (
+      offset &&
+      offset.tagName !== 'NGB-DATEPICKER' &&
+      !this.elementRef.nativeElement.contains($event.target)
+    ) {
       this.d.close();
     }
   }
@@ -105,7 +113,7 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   // From ControlValueAccessor interface
   writeValue(value: any) {
     if (!value) {
-      // this.model = '';
+      this.model = null;
       return;
     }
     const newModel = this.parseTimestamp(value);

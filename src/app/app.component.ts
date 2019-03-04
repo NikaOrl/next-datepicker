@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent {
   appFormGroup = new FormGroup({
-    shippingDate: new FormControl('shippingDate')
+    shippingDate: new FormControl(12344400000)
   });
+  someDate = 12344400000;
 }
