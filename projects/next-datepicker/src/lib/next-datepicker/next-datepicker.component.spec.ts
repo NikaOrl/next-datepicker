@@ -65,7 +65,7 @@ describe(`NextDatepickerComponent`, () => {
   });
 
   it(`should check default state of input component properties`, () => {
-    expect(component.placement).toBe('top-left');
+    expect(component.placement).toBe('bottom-left');
     expect(component.container).toBe('');
     expect(component.theme).toBe(DatePickerThemes.FormControl);
     expect(component.alignment).toBe(DatePickerAlignment.left);
@@ -180,27 +180,47 @@ describe(`NextDatepickerComponent`, () => {
   });
 
   it(`should reset model when no value passed`, () => {
-    component.model = 'some value';
+    const date = new Date();
+    const ngbDateStruct = {
+      day: date.getUTCDay(),
+      month: date.getUTCMonth(),
+      year: date.getUTCFullYear(),
+    };
+    component.model = ngbDateStruct;
     component.writeValue(null);
-    expect(component.model).toBe('');
+    expect(component.model).toBe(null);
   });
 
   it(`should not change model when value already existed`, () => {
-    const value = 'some value';
-    const spy = spyOn(component, 'parseTimestamp').and.returnValue(value);
-    component.model = value;
-    component.writeValue(value);
-    expect(component.model).toBe(value);
-    expect(spy).toHaveBeenCalledWith(value);
+    const date = new Date();
+    const ngbDateStruct = {
+      day: date.getUTCDay(),
+      month: date.getUTCMonth(),
+      year: date.getUTCFullYear(),
+    };
+    const spy = spyOn(component, 'parseTimestamp').and.returnValue(ngbDateStruct);
+    component.model = ngbDateStruct;
+    component.writeValue(ngbDateStruct);
+    expect(component.model).toBe(ngbDateStruct);
+    expect(spy).toHaveBeenCalledWith(ngbDateStruct);
   });
 
   it(`should change model when value is not equal to model`, () => {
-    const value = 'new value';
-    const spy = spyOn(component, 'parseTimestamp').and.returnValue(value);
-    component.model = 'some value';
-    component.writeValue(value);
-    expect(component.model).toBe(value);
-    expect(spy).toHaveBeenCalledWith(value);
+    const date = new Date();
+    const ngbDateStruct = {
+      day: date.getUTCDay(),
+      month: date.getUTCMonth(),
+      year: date.getUTCFullYear(),
+    };
+    const spy = spyOn(component, 'parseTimestamp').and.returnValue(ngbDateStruct);
+    component.model = {
+      day: date.getUTCDay(),
+      month: date.getUTCMonth(),
+      year: date.getUTCFullYear(),
+    };
+    component.writeValue(ngbDateStruct);
+    expect(component.model).toBe(ngbDateStruct);
+    expect(spy).toHaveBeenCalledWith(ngbDateStruct);
   });
 
   it(`should register on changed callback`, () => {
