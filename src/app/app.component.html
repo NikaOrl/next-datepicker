@@ -1,22 +1,13 @@
 <form [formGroup]="appFormGroup">
   <div class="form-input">
     <label for="shippingDate">Shipping Date</label>
-    <next-datepicker
-      class="form-control"
-      formControlName="shippingDate"
-      id="'shippingDate'"
-    ></next-datepicker>
+    <next-datepicker class="form-control" formControlName="shippingDate" id="'shippingDate'"></next-datepicker>
   </div>
 </form>
 
 <form>
   <div class="form-input">
     <label for="shippingDate">Shipping Date</label>
-    <next-datepicker
-      class="form-control"
-      [(ngModel)]="someDate"
-      id="'shippingDate'"
-      name="mew"
-    ></next-datepicker>
+    <next-datepicker class="form-control" [(ngModel)]="someDate" id="'shippingDate'" name="mew"></next-datepicker>
   </div>
 </form>

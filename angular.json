@@ -141,10 +141,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "projects/next-datepicker/tsconfig.lib.json",
-              "projects/next-datepicker/tsconfig.spec.json"
-            ],
+            "tsConfig": ["projects/next-datepicker/tsconfig.lib.json", "projects/next-datepicker/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }
