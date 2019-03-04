@@ -47,6 +47,7 @@
     "@storybook/addon-options": "^4.1.13",
     "@storybook/addon-viewport": "^4.1.13",
     "@storybook/angular": "^4.1.13",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
