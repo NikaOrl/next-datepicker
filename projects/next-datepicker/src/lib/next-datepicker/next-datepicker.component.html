@@ -1,0 +1,15 @@
+<input
+  [class]="cssClasses"
+  [id]="id"
+  [(ngModel)]="model"
+  (ngModelChange)="setModel($event)"
+  [ngModelOptions]="{ standalone: true }"
+  disableHandInput
+  ngbDatepicker
+  #d="ngbDatepicker"
+  [container]="container"
+  #input
+  [placement]="placement"
+  (click)="d.open()"
+  (focus)="d.open()"
+/>
