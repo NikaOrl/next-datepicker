@@ -1,27 +1,29 @@
 $white: #fff;
 $black: #000;
 
-$blue-light: #5291dd;
-$blue: #0460a9;
 $blue-dark: #023761;
+$blue: #0460a9;
+$blue-light: #5291dd;
 
 $gray: #9d9d9d;
-$gray-light: #ededed;
+$placeholder-gray: #888;
 $gray-medium: #c6c6c6;
+$highlight-gray: #e3e3e3;
+$gray-light: #ededed;
 
 $carmine-light: #d13a32;
 
-$unnamed-white: #f8f9fa;
-$unnamed-white-2: #e2e6ea;
-$unnamed-white-3: #dae0e5;
-$unnamed-white-4: #e9ecef;
+$unnamed-white: $white; //#f8f9fa;
+$unnamed-white-2: $gray-light; // #e2e6ea;
+$unnamed-white-4: $gray-light; // #e9ecef;
+$unnamed-white-3: $highlight-gray; // #dae0e5;
 
-$unnamed-black: #111;
+$unnamed-black: $black; // #111;
 
-$unnamed-gray: #868e96;
-$unnamed-gray-2: #f8f9fa80;
+$unnamed-gray: $placeholder-gray; // #868e96;
+$unnamed-gray-2: $placeholder-gray; // #f8f9fa80;
 
-$unnamed-blue-2: #007bff;
+$unnamed-blue: $blue-light; // #007bff;
 
 *,
 *::before,
@@ -246,9 +248,9 @@ next-datepicker {
       border-color: $unnamed-white-3;
     }
 
-    // .bg-primary {
-    //   background-color: $unnamed-blue-2 !important;
-    // }
+    .bg-primary {
+      background-color: $unnamed-blue !important;
+    }
 
     .bg-light {
       background-color: $unnamed-white;
