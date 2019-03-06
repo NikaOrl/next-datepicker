@@ -13,11 +13,12 @@
     "deploy-storybook": "storybook-to-ghpages",
     "build_lib": "ng build next-datepicker",
     "npm_pack": "cd dist/next-datepicker && npm pack && cd ../..",
-    "package": "npm run build_lib && npm run npm_pack && npm i file:dist/next-datepicker/next-datepicker-0.0.1.tgz --no-save",
-    "postinstall": "npm run package",
+    "npm_package": "npm run build_lib && npm run npm_pack && npm i file:dist/next-datepicker/next-datepicker-0.0.1.tgz --no-save",
+    "postinstall": "npm run npm_package",
     "test_lib": "ng test next-datepicker",
     "check_coverage": "ng test next-datepicker --watch=false --code-coverage",
-    "bump": "cd projects/next-datepicker && yarn version --patch"
+    "bump": "cd projects/next-datepicker && yarn version --patch",
+    "package": "yarn bump && yarn build_lib && yarn npm_pack"
   },
   "private": true,
   "dependencies": {

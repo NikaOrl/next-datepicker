@@ -1,126 +1,15 @@
-$white: #fff;
 $black: #000;
 
 $blue-dark: #023761;
 $blue: #0460a9;
-$blue-light: #5291dd;
 
-$gray: #9d9d9d;
-$placeholder-gray: #888;
-$gray-medium: #c6c6c6;
-$highlight-gray: #e3e3e3;
-$gray-light: #ededed;
+$red-danger-color: #d13a32;
 
-$carmine-light: #d13a32;
+:host {
+  padding: 0 1px !important;
 
-$unnamed-white: $white; //#f8f9fa;
-$unnamed-white-2: $gray-light; // #e2e6ea;
-$unnamed-white-4: $gray-light; // #e9ecef;
-$unnamed-white-3: $highlight-gray; // #dae0e5;
-
-$unnamed-black: $black; // #111;
-
-$unnamed-gray: $placeholder-gray; // #868e96;
-$unnamed-gray-2: $placeholder-gray; // #f8f9fa80;
-
-$unnamed-blue: $blue-light; // #007bff;
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-} // I have some suspicions that we don't need this code
-
-next-datepicker {
-  -webkit-tap-highlight-color: transparent;
-  background-color: $white;
-  color: $black;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0 1px;
-  text-align: left;
-
-  .form-control {
-    background-clip: padding-box;
-    background-color: $white;
-    background-image: none;
-    border: 1px solid $gray;
-    border-radius: 0;
-    color: $black;
-    display: block;
-    font-size: 14px;
-    line-height: 1.25;
-    padding: 7px 10px;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    width: 100%;
-
-    &::-ms-expand {
-      background-color: transparent;
-      border: 0;
-    }
-
-    &:focus {
-      background-color: $white;
-      border-color: $black;
-      color: $black;
-      outline: none;
-    }
-
-    &::-webkit-input-placeholder {
-      color: $gray;
-      opacity: 1;
-    }
-
-    &:-ms-input-placeholder {
-      color: $gray;
-      opacity: 1;
-    }
-
-    &::placeholder {
-      color: $gray;
-      opacity: 1;
-    }
-
-    &:disabled,
-    &[readonly] {
-      background-color: $unnamed-white-4;
-      opacity: 1;
-    }
-  }
-
-  .dropdown-menu {
-    background-clip: padding-box;
-    background-color: $white;
-    border: 1px solid $gray;
-    border-radius: 2px;
-    color: $black;
-    display: none;
-    float: left;
-    font-size: 14px;
-    left: 0;
-    list-style: none;
-    margin: 0.125rem 0 0;
-    min-width: 144px;
-    padding: 6px 0;
-    position: absolute;
-    text-align: left;
-    top: 100%;
-    z-index: 1000;
-
-    &.show {
-      display: block;
-    }
-  }
-
-  .show > a {
-    outline: 0;
-  }
-
-  .ng-invalid {
-    border: 1px solid $carmine-light;
+  &.ng-invalid {
+    border: 1px solid $red-danger-color;
   }
 
   input {
@@ -128,224 +17,27 @@ next-datepicker {
     height: 100%;
     width: 100%;
   }
+}
 
-  .inline {
-    color: $blue;
-    cursor: pointer;
+.inline {
+  color: $blue;
+  cursor: pointer;
 
-    &:hover,
-    &:focus {
-      color: $blue-dark;
-    }
-
-    &:disabled {
-      color: $black;
-      cursor: auto;
-    }
+  &:hover,
+  &:focus {
+    color: $blue-dark;
   }
 
-  .left-aligned {
-    text-align: left;
+  &:disabled {
+    color: $black;
+    cursor: auto;
   }
+}
 
-  .right-aligned {
-    text-align: right;
-  }
+.left-aligned {
+  text-align: left;
+}
 
-  ngb-datepicker {
-    //  .text-white {
-    //   color: $white !important;
-    // }
-
-    .btn {
-      -moz-user-select: none;
-      -ms-user-select: none;
-      -webkit-user-select: none;
-      background-color: $gray-light;
-      border: 1px solid $gray;
-      border-radius: 2px;
-      display: inline-block;
-      font-size: 14px;
-      font-weight: normal;
-      line-height: 1.25;
-      padding: 7px 12px;
-      text-align: center;
-      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-      user-select: none;
-      vertical-align: middle;
-      white-space: nowrap;
-
-      &:focus,
-      &:hover {
-        cursor: pointer;
-        text-decoration: none;
-      }
-
-      &:hover {
-        background-color: $gray-medium;
-      }
-
-      &.disabled,
-      &:disabled {
-        background-color: $gray-light;
-        cursor: default;
-        opacity: 0.65;
-      }
-
-      :active,
-      &.active {
-        background-image: none;
-      }
-    }
-
-    .btn-link {
-      background-color: transparent;
-      border: 0;
-      color: $blue;
-      font-weight: normal;
-      padding: 1px 6px;
-
-      &:hover {
-        background-color: transparent;
-        border-color: transparent;
-        color: $blue;
-        text-decoration: underline;
-      }
-
-      &:focus,
-      &.focus {
-        border-color: transparent;
-        box-shadow: none;
-      }
-
-      &:disabled,
-      &.disabled {
-        color: $unnamed-gray;
-      }
-    }
-
-    .btn-light {
-      background: transparent;
-      // border: solid 1px $unnamed-white; //variant that looks like in example
-      color: $unnamed-black;
-      height: 2em;
-      line-height: 2em;
-      width: 2em;
-
-      &:hover {
-        background-color: $unnamed-white-2;
-        border-color: $unnamed-white-3;
-        color: $unnamed-black;
-      }
-
-      &.focus,
-      &:focus {
-        box-shadow: 0 0 0 3px $unnamed-gray-2;
-      }
-
-      &.disabled,
-      &:disabled {
-        background-color: $unnamed-white;
-        border-color: $unnamed-white;
-      }
-
-      &.active,
-      &:active {
-        background-color: $unnamed-white-2;
-        background-image: none;
-        border-color: $unnamed-white-3;
-      }
-    }
-
-    .show > .btn-light.dropdown-toggle {
-      background-color: $unnamed-white-2;
-      background-image: none;
-      border-color: $unnamed-white-3;
-    }
-
-    .bg-primary {
-      background-color: $unnamed-blue !important;
-    }
-
-    .bg-light {
-      background-color: $unnamed-white;
-    }
-
-    .custom-select {
-      -webkit-appearance: none;
-      background: $white
-        url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E")
-        no-repeat right 12px center;
-      background-clip: padding-box;
-      background-size: 8px 10px;
-      border: 1px solid $gray;
-      border-radius: 2px;
-      color: $black;
-      display: inline-block;
-      height: calc(31.5px + 2px);
-      line-height: 1.25;
-      max-width: 100%;
-      // padding: 7px 26px 7px 12px;
-      vertical-align: middle;
-
-      &:focus {
-        border-color: $black;
-        outline: none;
-
-        &::-ms-value {
-          background-color: $white;
-          color: $black;
-        }
-      }
-
-      &:disabled {
-        background-color: $unnamed-white-4;
-        color: $unnamed-gray;
-      }
-
-      &::-ms-expand {
-        opacity: 0;
-      }
-    }
-
-    select.custom-select {
-      font-size: 1.1em;
-      width: 49%;
-    }
-
-    .text-muted {
-      color: $unnamed-gray;
-    }
-
-    .ngb-dp-day,
-    .ngb-dp-weekday,
-    .ngb-dp-week-number {
-      height: 2em;
-      width: 2em;
-    }
-
-    .ngb-dp-day {
-      justify-content: space-around;
-    }
-
-    .ngb-dp-week {
-      justify-content: space-around;
-    }
-
-    ngb-datepicker-navigation-select {
-      display: flex;
-      justify-content: space-between;
-      width: 9em;
-    }
-
-    ngb-datepicker-navigation {
-      height: 2em;
-      line-height: 1.85em;
-    }
-
-    .ngb-dp-header {
-      height: 4em;
-      margin-bottom: -1.7em;
-    }
-  }
+.right-aligned {
+  text-align: right;
 }
