@@ -1,5 +1,5 @@
 import {storiesOf} from '@storybook/angular';
-import {NextDatepickerComponent, NextDateDisplay} from 'next-datepicker';
+import {NextDatepickerComponent, NextDateDisplay} from '../../projects/next-datepicker/src/public_api';
 import {withNotes} from '@storybook/addon-notes';
 import {withKnobs} from '@storybook/addon-knobs';
 import * as marked from 'marked';
