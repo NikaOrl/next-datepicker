@@ -43,7 +43,6 @@ export class AppModule {
   <div class="form-input">
     <label for="date">Date</label>
     <next-datepicker
-      class="form-control"
       [(ngModel)]="someDate"
       id="'date'"
       name="date"
