@@ -5,21 +5,17 @@ import {storiesOf} from '@storybook/angular';
 import {withNotes} from '@storybook/addon-notes';
 import {withKnobs} from '@storybook/addon-knobs';
 import {setConsoleOptions} from '@storybook/addon-console';
-// import {action} from '@storybook/addon-actions';
 
 import * as marked from 'marked';
 import defaultText from './default.md';
 import withDifferentAlignments from './with-different-alignments.md';
 import withDifferentPlacements from './with-different-placements.md';
 import withDifferentThemes from './with-different-themes.md';
+import withChangeOutput from './with-change-output.md';
 
 import {NextDatepickerComponent, NextDateDisplay} from '../../projects/next-datepicker/src/public_api';
 
 import './nibr-bootstrap.css';
-
-export const defaultDate = {
-  someDate: 12344400000,
-};
 
 const panelExclude = setConsoleOptions({}).panelExclude;
 setConsoleOptions({
@@ -52,18 +48,13 @@ storiesOf('next-datepicker', module)
       <form>
         <div class="container">
           <label for="date">Date:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate" (change)="onSomeTh()"
+          <next-datepicker [(ngModel)]="someDate"
               id="date" name="date" ></next-datepicker>
         </div>
       </form>
     `,
       props: {
-        defaultDate,
-        onClick: (e) => {
-          console.log(e);
-          // e.preventDefault();
-          // action('log2')(e.target);
-        },
+        someDate: 12344400000,
       },
     })),
   )
@@ -80,17 +71,20 @@ storiesOf('next-datepicker', module)
       <form>
         <div class="container">
           <label for="date1">Left-aligned datepicker:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate1"
               id="date1" name="date" [alignment]="'left-aligned'"></next-datepicker>
         </div>
         <div class="container">
           <label for="date2">Right-aligned datepicker:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate2"
               id="date2" name="date" [alignment]="'right-aligned'"></next-datepicker>
         </div>
       </form>
     `,
-      props: {defaultDate},
+      props: {
+        someDate1: 12344400000,
+        someDate2: 12344400000,
+      },
     })),
   )
   .add(
@@ -106,27 +100,32 @@ storiesOf('next-datepicker', module)
       <form>
         <div class="container">
           <label for="date1">Bottom-right datepicker:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate1"
               id="date1" name="date" [placement]="'bottom-right'"></next-datepicker>
         </div>
         <div class="container">
           <label for="date2">Bottom-left datepicker:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate2"
               id="date2" name="date" [placement]="'bottom-left'"></next-datepicker>
         </div>
         <div class="container">
           <label for="date3">Top-left datepicker:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate3"
               id="date3" name="date" [placement]="'top-left'"></next-datepicker>
         </div>
         <div class="container">
           <label for="date4">Top-right datepicker:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate4"
               id="date4" name="date" [placement]="'top-right'"></next-datepicker>
         </div>
       </form>
     `,
-      props: {defaultDate},
+      props: {
+        someDate1: 12344400000,
+        someDate2: 12344400000,
+        someDate3: 12344400000,
+        someDate4: 12344400000,
+      },
     })),
   )
   .add(
@@ -142,16 +141,45 @@ storiesOf('next-datepicker', module)
       <form>
         <div class="container">
           <label for="date1">Form-control datepicker:</label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate1"
               id="date1" name="date" [theme]="'form-control'"></next-datepicker>
         </div>
         <div class="container">
           <label for="date2" class="label-for-inline-datepicker">Inline datepicker: </label>
-          <next-datepicker [(ngModel)]="defaultDate.someDate"
+          <next-datepicker [(ngModel)]="someDate2"
               id="date2" name="date" [theme]="'inline'"></next-datepicker>
         </div>
       </form>
     `,
-      props: {defaultDate},
+      props: {
+        someDate1: 12344400000,
+        someDate2: 12344400000,
+      },
+    })),
+  )
+  .add(
+    'With change output',
+    withNotes({text: marked(withChangeOutput)})(() => ({
+      moduleMetadata: {
+        imports: [NgbDatepickerModule],
+        declarations: [NextDatepickerComponent],
+        providers: [DatePipe, NextDateDisplay],
+      },
+      template: `
+      ${styles}
+      <form>
+        <div class="container">
+          <label for="date">Date:</label>
+          <next-datepicker [(ngModel)]="someDate" (change)="onSomeTh()"
+              id="date" name="date" ></next-datepicker>
+        </div>
+      </form>
+    `,
+      props: {
+        someDate: 12344400000,
+        onSomeTh: () => {
+          alert('Date was changed');
+        },
+      },
     })),
   );

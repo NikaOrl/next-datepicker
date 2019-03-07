@@ -4,6 +4,8 @@
 npm i next-datepicker
 ```
 
+To use this component, the project must have @ng-bootstrap/ng-bootstrap dependency
+
 ## Basic usage example with NgModel
 
 ### Add module into your app
@@ -105,7 +107,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 ## The checkbox has:
 
-### 5 inputs: ADD THE DESCRIPTION
+### 5 inputs:
 
 - placement: string;
 - container: string;
@@ -115,9 +117,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 (In case of missing the id, it will be automatically generated)
 
-### 1 output: ADD THE DESCRIPTION
+### 1 output:
 
-- change.
+- change - will be called by "onChange"
 
 ### The template for this example looks like the code below
 
@@ -126,7 +128,6 @@ import { FormControl, FormGroup } from '@angular/forms';
   <div class="form-input">
     <label for="date">Date</label>
     <next-datepicker
-      class="form-control"
       [(ngModel)]="someDate"
       id="'date'"
       name="date"
