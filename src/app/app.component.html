@@ -8,6 +8,12 @@
 <form>
   <div class="form-input">
     <label for="shippingDate">Shipping Date</label>
-    <next-datepicker class="form-control" [(ngModel)]="someDate" id="'shippingDate'" name="mew"></next-datepicker>
+    <next-datepicker
+      class="form-control"
+      [(ngModel)]="someDate"
+      id="'shippingDate'"
+      name="mew"
+      [alignment]="DatePickerAlignment.right"
+    ></next-datepicker>
   </div>
 </form>

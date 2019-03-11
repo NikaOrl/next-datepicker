@@ -1,10 +1,19 @@
 ## The datepicker with different themes
 
 You can set different themes to the datepicker.
-There are two options:
+There are two options in the special enum DatePickerThemes:
 
 - 'form-control' (by default)
 - 'inline'
+
+## To use this enum import it into the component:
+
+import {DatePickerThemes} from 'next-datepicker';
+
+export class AppComponent {
+...
+public DatePickerThemes = DatePickerThemes;
+}
 
 ### The template for this example looks like the code below
 
@@ -22,7 +31,7 @@ There are two options:
       [(ngModel)]="someDate1"
       id="date1"
       name="date"
-      [theme]="'form-control'"
+      [theme]="DatePickerThemes.formControl"
     ></next-datepicker>
   </div>
   <div class="container">
@@ -34,7 +43,7 @@ There are two options:
       [(ngModel)]="someDate2"
       id="date2"
       name="date"
-      [theme]="'inline'"
+      [theme]="DatePickerThemes.inline"
     ></next-datepicker>
   </div>
 </form>

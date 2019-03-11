@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {DatePickerAlignment} from 'next-datepicker';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,5 @@ export class AppComponent {
     shippingDate: new FormControl(12344400000),
   });
   public someDate = 12344400000;
+  public DatePickerAlignment = DatePickerAlignment;
 }

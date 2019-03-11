@@ -1,6 +1,7 @@
 import {configure, addDecorator} from '@storybook/angular';
 import {withOptions} from '@storybook/addon-options';
 import './styles.css';
+import './nibr-bootstrap.css';
 
 addDecorator(
   withOptions({

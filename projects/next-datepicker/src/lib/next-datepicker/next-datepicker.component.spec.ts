@@ -16,6 +16,7 @@ describe(`NextDatepickerComponent`, () => {
     }
   }
 
+  // tslint:disable-next-line:max-classes-per-file
   @Component({
     template: `
       <next-datepicker [id]="id" (change)="onChange($event)"></next-datepicker>
@@ -67,10 +68,10 @@ describe(`NextDatepickerComponent`, () => {
   it(`should check default state of input component properties`, () => {
     expect(component.placement).toBe('bottom-left');
     expect(component.container).toBe('');
-    expect(component.theme).toBe(DatePickerThemes.FormControl);
+    expect(component.theme).toBe(DatePickerThemes.formControl);
     expect(component.alignment).toBe(DatePickerAlignment.left);
-    expect(component.onChangeCallback()).toBeUndefined();
-    expect(component.onTouchedCallback()).toBeUndefined();
+    expect(component.onChangeCallback()).toBeNull();
+    expect(component.onTouchedCallback()).toBeNull();
   });
 
   it(`should close datepicker on ESC when it's opened`, () => {
@@ -198,11 +199,12 @@ describe(`NextDatepickerComponent`, () => {
       month: date.getUTCMonth(),
       year: date.getUTCFullYear(),
     };
+    const ngbDateStructNum = date.getTime();
     const spy = spyOn(component, 'parseTimestamp').and.returnValue(ngbDateStruct);
     component.model = ngbDateStruct;
-    component.writeValue(ngbDateStruct);
+    component.writeValue(ngbDateStructNum);
     expect(component.model).toBe(ngbDateStruct);
-    expect(spy).toHaveBeenCalledWith(ngbDateStruct);
+    expect(spy).toHaveBeenCalledWith(ngbDateStructNum);
   });
 
   it(`should change model when value is not equal to model`, () => {
@@ -212,15 +214,12 @@ describe(`NextDatepickerComponent`, () => {
       month: date.getUTCMonth(),
       year: date.getUTCFullYear(),
     };
+    const ngbDateStructNum = date.getTime();
     const spy = spyOn(component, 'parseTimestamp').and.returnValue(ngbDateStruct);
-    component.model = {
-      day: date.getUTCDay(),
-      month: date.getUTCMonth(),
-      year: date.getUTCFullYear(),
-    };
-    component.writeValue(ngbDateStruct);
+    component.model = ngbDateStruct;
+    component.writeValue(ngbDateStructNum);
     expect(component.model).toBe(ngbDateStruct);
-    expect(spy).toHaveBeenCalledWith(ngbDateStruct);
+    expect(spy).toHaveBeenCalledWith(ngbDateStructNum);
   });
 
   it(`should register on changed callback`, () => {
@@ -262,6 +261,6 @@ describe(`NextDatepickerComponent`, () => {
   });
 
   it(`should get css classes for the component`, () => {
-    expect(component.cssClasses).toBe(`${DatePickerThemes.FormControl} ${DatePickerAlignment.left}`);
+    expect(component.cssClasses).toBe(`${DatePickerThemes.formControl} ${DatePickerAlignment.left}`);
   });
 });

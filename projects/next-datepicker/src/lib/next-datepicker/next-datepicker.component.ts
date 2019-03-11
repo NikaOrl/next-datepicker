@@ -17,8 +17,8 @@ import {NextDateFormatter} from '../next-date-formatter/next-date-formatter.serv
 import {NextDateDisplay} from '../next-date-display/next-date-display.pipe';
 
 export enum DatePickerThemes {
-  FormControl = 'form-control',
-  Inline = 'inline',
+  formControl = 'form-control',
+  inline = 'inline',
 }
 
 export enum DatePickerAlignment {
@@ -28,7 +28,7 @@ export enum DatePickerAlignment {
 
 let uniqueId = 0;
 
-const noop = function(val?: any) {};
+const noop = (val?: any) => null;
 
 @Component({
   selector: 'next-datepicker',
@@ -41,11 +41,6 @@ const noop = function(val?: any) {};
       useExisting: forwardRef(() => NextDatepickerComponent),
       multi: true,
     },
-    {
-      provide: NgbDateParserFormatter,
-      useClass: NextDateFormatter,
-      deps: [NextDateDisplay],
-    },
   ],
 })
 export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
@@ -57,9 +52,9 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   public model: NgbDateStruct;
   @Input() public id = `next-datepicker-${++uniqueId}`;
   @Input() public placement = 'bottom-left';
-  @Input() public container = ''; // 'body' or null
-  @Input() public theme = DatePickerThemes.FormControl; // input class = 'form-control' or 'inline'
-  @Input() public alignment = DatePickerAlignment.left; // input class = 'left-aligned' or 'right-aligned'
+  @Input() public container = '';
+  @Input() public theme = DatePickerThemes.formControl;
+  @Input() public alignment = DatePickerAlignment.left;
   @ViewChild(NgbInputDatepicker) public d: NgbInputDatepicker;
   @ViewChild('input') public input: ElementRef;
   @Output() public change = new EventEmitter<number>();
@@ -102,7 +97,7 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   }
 
   // From ControlValueAccessor interface
-  public writeValue(value: any) {
+  public writeValue(value: number | null) {
     if (!value) {
       this.model = null;
       return;
@@ -114,16 +109,16 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   }
 
   // From ControlValueAccessor interface
-  public registerOnChange(fn: any) {
+  public registerOnChange(fn: (val?: any) => void) {
     this.onChangeCallback = fn;
   }
 
   // From ControlValueAccessor interface
-  public registerOnTouched(fn: any) {
+  public registerOnTouched(fn: (val?: any) => void) {
     this.onTouchedCallback = fn;
   }
 
-  public setDisabledState(isDisabled) {
+  public setDisabledState(isDisabled: boolean) {
     this.renderer.setProperty(this.input.nativeElement, 'disabled', isDisabled);
   }
 
