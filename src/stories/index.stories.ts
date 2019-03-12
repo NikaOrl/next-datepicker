@@ -20,6 +20,9 @@ import {
   DatePickerThemes,
   NextDateFormatter,
 } from '../../projects/next-datepicker/src/public_api';
+import {PipeTransform, Pipe, Component, NO_ERRORS_SCHEMA, NgModule, forwardRef} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
 
 const panelExclude = setConsoleOptions({}).panelExclude;
 setConsoleOptions({
@@ -36,6 +39,29 @@ const styles = `
   \}
   </style>
 `;
+
+@Pipe({name: 'NextDateDisplayFormatYyyyMmmDd', pure: true})
+export class NextDateDisplayFormatYyyyMmmDd implements PipeTransform {
+  constructor(private datePipe: DatePipe) {}
+
+  public transform(input: any, addTime: boolean = false): string {
+    if (input && (input > 0 || input.length === 10 || input instanceof Date)) {
+      const newDate = new Date(input);
+      return this.datePipe.transform(newDate, `yyyy-MMM-dd ${addTime ? 'HH:mm' : ''}`).trim();
+    } else {
+      return '';
+    }
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Component({
+  template: `
+    <next-datepicker></next-datepicker>
+  `,
+  selector: 'next-datepicker-format-yyyy-mmm-dd',
+})
+export class NextDatepickerFormatYyyyMmmDd extends NextDatepickerComponent {}
 
 storiesOf('next-datepicker', module)
   .addDecorator(withKnobs)
@@ -195,13 +221,13 @@ storiesOf('next-datepicker', module)
     withNotes({text: marked(defaultText)})(() => ({
       moduleMetadata: {
         imports: [NgbDatepickerModule],
-        declarations: [NextDatepickerComponent],
+        declarations: [NextDatepickerComponent, NextDatepickerFormatYyyyMmmDd, NextDateDisplayFormatYyyyMmmDd],
         providers: [
           DatePipe,
           {
             provide: NgbDateParserFormatter,
             useClass: NextDateFormatter,
-            deps: [NextDateDisplay],
+            deps: [NextDateDisplayFormatYyyyMmmDd],
           },
         ],
       },
@@ -210,8 +236,8 @@ storiesOf('next-datepicker', module)
       <form>
         <div class="container">
           <label for="date">Date:</label>
-          <next-datepicker [(ngModel)]="someDate"
-              id="date" name="date" ></next-datepicker>
+          <next-datepicker-format-yyyy-mmm-dd [(ngModel)]="someDate"
+              id="date" name="date" ></next-datepicker-format-yyyy-mmm-dd>
         </div>
       </form>
     `,
