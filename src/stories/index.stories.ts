@@ -20,9 +20,6 @@ import {
   DatePickerThemes,
   NextDateFormatter,
 } from '../../projects/next-datepicker/src/public_api';
-import {PipeTransform, Pipe, Component, NO_ERRORS_SCHEMA, NgModule, forwardRef} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {NextDatepickerFormatYyyyMmmDdComponent} from '../app/next-datepicker-format-yyyy-mmm-dd/next-datepicker-format-yyyy-mmm-dd.component';
 import {NextDateDisplayFormatYyyyMmmDd} from '../app/next-datepicker-format-yyyy-mmm-dd/next-date-format-yyyy-mmm-dd-display.pipe';
 
