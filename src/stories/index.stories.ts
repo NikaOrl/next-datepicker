@@ -1,4 +1,4 @@
-import {NgbDatepickerModule, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
 
 import {storiesOf} from '@storybook/angular';
@@ -12,16 +12,17 @@ import withDifferentAlignments from './with-different-alignments.md';
 import withDifferentPlacements from './with-different-placements.md';
 import withDifferentThemes from './with-different-themes.md';
 import withChangeOutput from './with-change-output.md';
+import withDifferentFormats from './with-different-formats.md';
 
 import {
   NextDatepickerComponent,
-  NextDateDisplay,
   DatePickerAlignment,
   DatePickerThemes,
-  NextDateFormatter,
 } from '../../projects/next-datepicker/src/public_api';
+
 import {NextDatepickerFormatYyyyMmmDdComponent} from '../app/next-datepicker-format-yyyy-mmm-dd/next-datepicker-format-yyyy-mmm-dd.component';
-import {NextDateDisplayFormatYyyyMmmDd} from '../app/next-datepicker-format-yyyy-mmm-dd/next-date-format-yyyy-mmm-dd-display.pipe';
+import {NextDatepickerFormatDdmmyyComponent} from '../app/next-datepicker-format-ddmmyy/next-datepicker-format-ddmmyy.component';
+import {NextDatepickerFormatDdMmmYyyyComponent} from '../app/next-datepicker-format-dd-mmm-yyyy/next-datepicker-format-dd-mmm-yyyy.component';
 
 const panelExclude = setConsoleOptions({}).panelExclude;
 setConsoleOptions({
@@ -194,26 +195,39 @@ storiesOf('next-datepicker', module)
   )
   .add(
     'with different date formats',
-    withNotes({text: marked(defaultText)})(() => ({
+    withNotes({text: marked(withDifferentFormats)})(() => ({
       moduleMetadata: {
         imports: [NgbDatepickerModule],
-        declarations: [NextDatepickerComponent, NextDatepickerFormatYyyyMmmDdComponent, NextDateDisplay],
-        providers: [
-          DatePipe,
-          {
-            provide: NgbDateParserFormatter,
-            useClass: NextDateFormatter,
-            deps: [NextDateDisplayFormatYyyyMmmDd],
-          },
+        declarations: [
+          NextDatepickerFormatYyyyMmmDdComponent,
+          NextDatepickerFormatDdmmyyComponent,
+          NextDatepickerFormatDdMmmYyyyComponent,
+          NextDatepickerComponent,
         ],
+        providers: [DatePipe],
       },
       template: `
       ${styles}
       <form>
         <div class="container">
-          <label for="date">Date:</label>
+          <label for="date0">Default date format (yyyy-MM-dd):</label>
+          <next-datepicker [(ngModel)]="someDate"
+              id="date0" name="date" ></next-datepicker>
+        </div>
+        <div class="container">
+          <label for="date1">The dd-MMM-yyyy format using a component nextDateDisplay pipe:</label>
+          <next-datepicker-format-dd-mmm-yyyy [(ngModel)]="someDate"
+              id="date1" name="date" ></next-datepicker-format-dd-mmm-yyyy>
+        </div>
+        <div class="container">
+          <label for="date3">The yyyy-MMM-dd format using a custom pipe:</label>
           <next-datepicker-format-yyyy-mmm-dd [(ngModel)]="someDate"
-              id="date" name="date" ></next-datepicker-format-yyyy-mmm-dd>
+              id="date3" name="date" ></next-datepicker-format-yyyy-mmm-dd>
+        </div>
+        <div class="container">
+          <label for="date2">The dd/MM/yy format using a custom pipe:</label>
+          <next-datepicker-format-ddmmyy [(ngModel)]="someDate"
+              id="date2" name="date" ></next-datepicker-format-ddmmyy>
         </div>
       </form>
     `,

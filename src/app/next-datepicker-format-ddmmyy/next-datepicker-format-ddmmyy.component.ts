@@ -1,26 +1,26 @@
 import {Component, forwardRef} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {NextDateFormatter} from '../../../projects/next-datepicker/src/public_api';
-import {NextDateFormatYyyyMmmDdDisplay} from './next-date-format-yyyy-mmm-dd-display.pipe';
+import {NextDateDisplayFormaDdMmYy} from './next-date-format-ddmmyy-display.pipe';
 
 @Component({
-  selector: 'next-datepicker-format-yyyy-mmm-dd',
-  templateUrl: './next-datepicker-format-yyyy-mmm-dd.component.html',
+  selector: 'next-datepicker-format-ddmmyy',
+  templateUrl: './next-datepicker-format-ddmmyy.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NextDatepickerFormatYyyyMmmDdComponent),
+      useExisting: forwardRef(() => NextDatepickerFormatDdmmyyComponent),
       multi: true,
     },
     {
       provide: NgbDateParserFormatter,
       useClass: NextDateFormatter,
-      deps: [NextDateFormatYyyyMmmDdDisplay],
+      deps: [NextDateDisplayFormaDdMmYy],
     },
   ],
 })
-export class NextDatepickerFormatYyyyMmmDdComponent implements ControlValueAccessor {
+export class NextDatepickerFormatDdmmyyComponent implements ControlValueAccessor {
   public model: number;
   public onChangeCallback = () => null;
   public onTouchedCallback = () => null;
