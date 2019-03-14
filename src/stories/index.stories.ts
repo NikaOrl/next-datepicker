@@ -8,6 +8,7 @@ import {setConsoleOptions} from '@storybook/addon-console';
 
 import * as marked from 'marked';
 import defaultText from './default.md';
+import dateData from './date-data.md';
 import withDifferentAlignments from './with-different-alignments.md';
 import withDifferentPlacements from './with-different-placements.md';
 import withDifferentThemes from './with-different-themes.md';
@@ -63,6 +64,41 @@ storiesOf('next-datepicker', module)
     `,
       props: {
         someDate: 12344400000,
+      },
+    })),
+  )
+  .add(
+    'Date data',
+    withNotes({text: marked(dateData)})(() => ({
+      moduleMetadata: {
+        imports: [NgbDatepickerModule],
+        declarations: [NextDatepickerComponent],
+        providers: [DatePipe],
+      },
+      template: `
+      ${styles}
+      <form>
+        <div class="container">
+          <label for="date">someDate1 = {{someDate1}}:</label>
+          <next-datepicker [(ngModel)]="someDate1"
+              id="date1" name="date1"></next-datepicker>
+        </div>
+        <div class="container">
+          <label for="date">someDate2 = {{someDate2}}:</label>
+          <next-datepicker [(ngModel)]="someDate2"
+              id="date2" name="date2"></next-datepicker>
+        </div>
+        <div class="container">
+          <label for="date">someDate3 = {{someDate3}} (the current date):</label>
+          <next-datepicker [(ngModel)]="someDate3"
+              id="date3" name="date3"></next-datepicker>
+        </div>
+      </form>
+    `,
+      props: {
+        someDate1: 1234440000,
+        someDate2: 18525584160000,
+        someDate3: new Date().getTime(),
       },
     })),
   )
@@ -194,7 +230,7 @@ storiesOf('next-datepicker', module)
     })),
   )
   .add(
-    'with different date formats',
+    'With different date formats',
     withNotes({text: marked(withDifferentFormats)})(() => ({
       moduleMetadata: {
         imports: [NgbDatepickerModule],
