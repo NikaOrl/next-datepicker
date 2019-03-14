@@ -1,10 +1,19 @@
 ## The datepicker with different alignments
 
 You can set different alignments to the datepicker.
-There are two options:
+There are two options in the special enum DatePickerAlignment:
 
 - 'left-aligned' (by default)
 - 'right-aligned'
+
+## To use this enum import it into the component:
+
+import {DatePickerAlignment} from 'next-datepicker';
+
+export class AppComponent {
+...
+public DatePickerAlignment = DatePickerAlignment;
+}
 
 ### The template for this example looks like the code below
 
@@ -22,7 +31,7 @@ There are two options:
       [(ngModel)]="someDate"
       id="date1"
       name="date"
-      [alignment]="'left-aligned'"
+      [alignment]="DatePickerAlignment.left"
     ></next-datepicker>
   </div>
   <div class="container">
@@ -33,7 +42,7 @@ There are two options:
       [(ngModel)]="someDate"
       id="date2"
       name="date"
-      [alignment]="'right-aligned'"
+      [alignment]="DatePickerAlignment.right"
     ></next-datepicker>
   </div>
 </form>
