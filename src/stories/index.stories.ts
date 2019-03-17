@@ -21,9 +21,11 @@ import {
   DatePickerThemes,
 } from '../../projects/next-datepicker/src/public_api';
 
+// tslint:disable:max-line-length
 import {NextDatepickerFormatYyyyMmmDdComponent} from '../app/next-datepicker-format-yyyy-mmm-dd/next-datepicker-format-yyyy-mmm-dd.component';
 import {NextDatepickerFormatDdmmyyComponent} from '../app/next-datepicker-format-ddmmyy/next-datepicker-format-ddmmyy.component';
 import {NextDatepickerFormatDdMmmYyyyComponent} from '../app/next-datepicker-format-dd-mmm-yyyy/next-datepicker-format-dd-mmm-yyyy.component';
+// tslint:enable:max-line-length
 
 const panelExclude = setConsoleOptions({}).panelExclude;
 setConsoleOptions({
@@ -35,8 +37,21 @@ const styles = `
   .container \{
     margin-top: 30px;
   \}
+  .container-for-placements \{
+    margin-top: 10px;
+    width: 50%;
+  \}
   .label-for-inline-datepicker \{
     margin-right: 10px;
+  \}
+  form \{
+    margin-bottom: 10px;
+  \}
+  .datepicker-form \{
+    margin-top: 150px;
+  \}
+  .datepicker-header \{
+    font-size: 40px;
   \}
   </style>
 `;
@@ -53,7 +68,8 @@ storiesOf('next-datepicker', module)
       },
       template: `
       ${styles}
-      <form>
+      <form class="datepicker-form">
+        <div class="container datepicker-header">Datepicker default view:</div>
         <div class="container">
           <label for="date">Date:</label>
           <next-datepicker [(ngModel)]="someDate"
@@ -77,7 +93,8 @@ storiesOf('next-datepicker', module)
       },
       template: `
       ${styles}
-      <form>
+      <form class="datepicker-form">
+      <div class="container datepicker-header">Datepicker date data:</div>
         <div class="container">
           <label for="date">someDate1 = {{someDate1}}:</label>
           <next-datepicker [(ngModel)]="someDate1"
@@ -112,7 +129,8 @@ storiesOf('next-datepicker', module)
       },
       template: `
       ${styles}
-      <form>
+      <form class="datepicker-form">
+        <div class="container datepicker-header">Datepicker different alignments:</div>
         <div class="container">
           <label for="date1">Left-aligned datepicker:</label>
           <next-datepicker [(ngModel)]="someDate1"
@@ -143,25 +161,65 @@ storiesOf('next-datepicker', module)
       template: `
       ${styles}
       <form>
-        <div class="container">
-          <label for="date1">Bottom-right datepicker:</label>
+        <div class="container container-for-placements">
+          <label for="date1">Bottom datepicker:</label>
           <next-datepicker [(ngModel)]="someDate1"
-              id="date1" name="date" [placement]="'bottom-right'"></next-datepicker>
+              id="date1" name="date" [placement]="'bottom'"></next-datepicker>
         </div>
-        <div class="container">
-          <label for="date2">Bottom-left datepicker:</label>
+        <div class="container container-for-placements">
+          <label for="date2">Bottom-right datepicker:</label>
           <next-datepicker [(ngModel)]="someDate2"
-              id="date2" name="date" [placement]="'bottom-left'"></next-datepicker>
+              id="date2" name="date" [placement]="'bottom-right'"></next-datepicker>
         </div>
-        <div class="container">
-          <label for="date3">Top-left datepicker:</label>
+        <div class="container container-for-placements">
+          <label for="date3">Bottom-left datepicker:</label>
           <next-datepicker [(ngModel)]="someDate3"
-              id="date3" name="date" [placement]="'top-left'"></next-datepicker>
+              id="date3" name="date" [placement]="'bottom-left'"></next-datepicker>
         </div>
-        <div class="container">
-          <label for="date4">Top-right datepicker:</label>
+        <div class="container container-for-placements">
+          <label for="date4">Right datepicker:</label>
           <next-datepicker [(ngModel)]="someDate4"
-              id="date4" name="date" [placement]="'top-right'"></next-datepicker>
+              id="date4" name="date" [placement]="'right'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date5">Right-top datepicker:</label>
+          <next-datepicker [(ngModel)]="someDate5"
+              id="date5" name="date" [placement]="'right-top'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date6">Right-bottom datepicker:</label>
+          <next-datepicker [(ngModel)]="someDate6"
+              id="date6" name="date" [placement]="'right-bottom'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date7">Left datepicker:</label>
+          <next-datepicker [(ngModel)]="someDate7"
+              id="date7" name="date" [placement]="'left'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date8">Left-top datepicker:</label>
+          <next-datepicker [(ngModel)]="someDate8"
+              id="date8" name="date" [placement]="'left-top'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date9">Left-bottom datepicker:</label>
+          <next-datepicker [(ngModel)]="someDate9"
+              id="date9" name="date" [placement]="'left-bottom'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date10">Top datepicker:</label>
+          <next-datepicker [(ngModel)]="someDate10"
+              id="date10" name="date" [placement]="'top'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date11">Top-right datepicker:</label>
+          <next-datepicker [(ngModel)]="someDate11"
+              id="date11" name="date" [placement]="'top-right'"></next-datepicker>
+        </div>
+        <div class="container container-for-placements">
+          <label for="date12">Top-left datepicker (by default):</label>
+          <next-datepicker [(ngModel)]="someDate12"
+              id="date12" name="date" [placement]="'top-left'"></next-datepicker>
         </div>
       </form>
     `,
@@ -170,6 +228,14 @@ storiesOf('next-datepicker', module)
         someDate2: 12344400000,
         someDate3: 12344400000,
         someDate4: 12344400000,
+        someDate5: 12344400000,
+        someDate6: 12344400000,
+        someDate7: 12344400000,
+        someDate8: 12344400000,
+        someDate9: 12344400000,
+        someDate10: 12344400000,
+        someDate11: 12344400000,
+        someDate12: 12344400000,
       },
     })),
   )
@@ -183,7 +249,8 @@ storiesOf('next-datepicker', module)
       },
       template: `
       ${styles}
-      <form>
+      <form class="datepicker-form">
+        <div class="container datepicker-header">Datepicker different themes:</div>
         <div class="container">
           <label for="date1">Form-control datepicker:</label>
           <next-datepicker [(ngModel)]="someDate1"
@@ -213,7 +280,8 @@ storiesOf('next-datepicker', module)
       },
       template: `
       ${styles}
-      <form>
+      <form class="datepicker-form">
+        <div class="container datepicker-header">Datepicker with change output:</div>
         <div class="container">
           <label for="date">Date:</label>
           <next-datepicker [(ngModel)]="someDate" (change)="onSomeTh()"
@@ -244,7 +312,8 @@ storiesOf('next-datepicker', module)
       },
       template: `
       ${styles}
-      <form>
+      <form class="datepicker-form">
+        <div class="container datepicker-header">Datepicker different date formats:</div>
         <div class="container">
           <label for="date0">Default date format (yyyy-MM-dd):</label>
           <next-datepicker [(ngModel)]="someDate"

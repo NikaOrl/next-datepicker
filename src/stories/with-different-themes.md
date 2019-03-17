@@ -8,12 +8,16 @@ There are two options in the special enum DatePickerThemes:
 
 ## To use this enum import it into the component:
 
+```
 import {DatePickerThemes} from 'next-datepicker';
 
 export class AppComponent {
 ...
-public DatePickerThemes = DatePickerThemes;
+  public get DatePickerThemes() {
+    return DatePickerThemes;
+  }
 }
+```
 
 ### The template for this example looks like the code below
 

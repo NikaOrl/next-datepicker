@@ -1,12 +1,20 @@
 ## The datepicker with different placements
 
 You can set different placements to the datepicker.
-There are four options:
+There are following options:
 
-- 'bottom-left' (by default)
-- 'bottom-right'
-- 'top-left'
-- 'top-right'
+- 'top';
+- 'top-left' (by default);
+- 'top-right';
+- 'bottom';
+- 'bottom-left';
+- 'bottom-right';
+- 'left';
+- 'left-top';
+- 'left-bottom';
+- 'right';
+- 'right-top';
+- 'right-bottom'.
 
 ### The template for this example looks like the code below
 
@@ -14,51 +22,17 @@ There are four options:
 <style>
   // bootstrap styles
   ...
+  .container-for-placements {
+    margin-top: 10px;
+    width: 50%;
+  }
 </style>
 <form>
-  <div class="container">
-    <label for="date1">
-      Bottom-right datepicker:
-    </label>
-    <next-datepicker
-      [(ngModel)]="someDate"
-      id="date1"
-      name="date"
-      [placement]="'bottom-right'"
-    ></next-datepicker>
+  <div class="container container-for-placements">
+    <label for="date1">Bottom datepicker:</label>
+    <next-datepicker [(ngModel)]="someDate1"
+        id="date1" name="date" [placement]="'bottom'"></next-datepicker>
   </div>
-  <div class="container">
-    <label for="date2">
-      Bottom-left datepicker:
-    </label>
-    <next-datepicker
-      [(ngModel)]="someDate"
-      id="date2"
-      name="date"
-      [placement]="'bottom-left'"
-    ></next-datepicker>
-  </div>
-  <div class="container">
-    <label for="date3">
-      Top-left datepicker:
-    </label>
-    <next-datepicker
-      [(ngModel)]="someDate"
-      id="date3"
-      name="date"
-      [placement]="'top-left'"
-    ></next-datepicker>
-  </div>
-  <div class="container">
-    <label for="date4">
-      Top-right datepicker:
-    </label>
-    <next-datepicker
-      [(ngModel)]="someDate"
-      id="date4"
-      name="date"
-      [placement]="'top-right'"
-    ></next-datepicker>
-  </div>
+  ...
 </form>
 ```

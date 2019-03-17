@@ -8,12 +8,16 @@ There are two options in the special enum DatePickerAlignment:
 
 ## To use this enum import it into the component:
 
+```
 import {DatePickerAlignment} from 'next-datepicker';
 
 export class AppComponent {
 ...
-public DatePickerAlignment = DatePickerAlignment;
+  public get DatePickerAlignment() {
+    return DatePickerAlignment;
+  }
 }
+```
 
 ### The template for this example looks like the code below
 

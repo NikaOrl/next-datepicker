@@ -107,17 +107,19 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 ## The checkbox has:
 
-### 5 inputs:
+### Datepicker inputs:
+
+- id: string (In case of missing the id, it will be automatically generated);
+- theme: string;
+- alignment: string;
+
+And all the datepicker inputs that you can [check here](https://ng-bootstrap.github.io/#/components/datepicker/api#NgbInputDatepicker) like
 
 - placement: string;
 - container: string;
-- theme: string;
-- alignment: string;
-- id: string.
+  etc.
 
-(In case of missing the id, it will be automatically generated)
-
-### 1 output:
+### Datepicker output:
 
 - change - will be called by "onChange"
 

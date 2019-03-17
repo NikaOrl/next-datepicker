@@ -10,11 +10,11 @@ import {
   Renderer2,
   ViewChild,
   ViewEncapsulation,
+  TemplateRef,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {NgbDateParserFormatter, NgbDateStruct, NgbInputDatepicker} from '@ng-bootstrap/ng-bootstrap';
-import {NextDateFormatter} from '../next-date-formatter/next-date-formatter.service';
-import {NextDateDisplay} from '../next-date-display/next-date-display.pipe';
+import {NgbDateStruct, NgbInputDatepicker, NgbDate} from '@ng-bootstrap/ng-bootstrap';
+import {DayTemplateContext} from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-day-template-context';
 
 export enum DatePickerThemes {
   formControl = 'form-control',
@@ -51,10 +51,28 @@ export class NextDatepickerComponent implements ControlValueAccessor, OnInit {
   public onTouchedCallback = noop;
   public model: NgbDateStruct;
   @Input() public id = `next-datepicker-${++uniqueId}`;
-  @Input() public placement = 'bottom-left';
-  @Input() public container = '';
   @Input() public theme = DatePickerThemes.formControl;
   @Input() public alignment = DatePickerAlignment.left;
+
+  @Input() public placement = 'top-left';
+  @Input() public container = '';
+
+  @Input() public autoClose = true;
+  @Input() public dayTemplate: TemplateRef<DayTemplateContext>;
+  @Input() public dayTemplateData: (date: NgbDate, current: {year: number; month: number}) => any;
+  @Input() public disabled: boolean;
+  @Input() public displayMonths: number;
+  @Input() public firstDayOfWeek: number;
+  @Input() public footerTemplate: TemplateRef<any>;
+  @Input() public markDisabled: (date: NgbDate, current: {year: number; month: number}) => boolean;
+  @Input() public maxDate: NgbDateStruct;
+  @Input() public minDate: NgbDateStruct;
+  @Input() public navigation: 'select' | 'arrows' | 'none';
+  @Input() public outsideDays: 'visible' | 'collapsed' | 'hidden';
+  @Input() public showWeekdays: boolean;
+  @Input() public showWeekNumbers: boolean;
+  @Input() public startDate: {year: number; month: number; day?: number};
+
   @ViewChild(NgbInputDatepicker) public d: NgbInputDatepicker;
   @ViewChild('input') public input: ElementRef;
   @Output() public change = new EventEmitter<number>();
