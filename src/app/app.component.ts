@@ -12,5 +12,8 @@ export class AppComponent {
     shippingDate: new FormControl(12344400000),
   });
   public someDate = 12344400000;
-  public DatePickerAlignment = DatePickerAlignment;
+
+  public get DatePickerAlignment() {
+    return DatePickerAlignment;
+  }
 }
